@@ -8,6 +8,7 @@ import app from '../app';
 import debugLib from 'debug';
 var debug = debugLib('userstestwebhost:server');
 import { createServer } from 'http';
+import logger from '../utils/logger';
 
 /**
  * Get port from environment and store in Express.
@@ -15,13 +16,13 @@ import { createServer } from 'http';
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
-console.log(`start server on http://localhost:${port}`)
 
 /**
  * Create HTTP server.
  */
 
 var server = createServer(app);
+logger.log('info', `start server on http://localhost:${port}`);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -60,9 +61,7 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  var bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -85,8 +84,6 @@ function onError(error) {
 
 function onListening() {
   var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
+  var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
