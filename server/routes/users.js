@@ -1,8 +1,10 @@
 import { Router } from 'express';
-var router = Router();
+import logger from '../utils/logger';
+const router = Router();
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
+  logger.info('users');
   res.send('respond with a resource');
 });
 
