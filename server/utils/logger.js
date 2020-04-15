@@ -1,5 +1,7 @@
 import appRoot from 'app-root-path';
 import winston from 'winston';
+import dotenv from 'dotenv';
+dotenv.config();
 
 // define the custom settings for each transport (file, console)
 var options = {
@@ -28,12 +30,13 @@ var options = {
 // instantiate a new Winston Logger with the settings defined above
 var logger = winston.createLogger({
   levels: winston.config.syslog.levels,
-  transports: [
-    new winston.transports.File(options.file),
-    new winston.transports.Console(options.console),
-  ],
+  transports: [new winston.transports.File(options.file)],
   exitOnError: false, // do not exit on handled exceptions
 });
+
+if (process.env.NODE_ENV !== 'production') {
+  logger.add(new winston.transports.Console(options.console));
+}
 
 // create a stream object with a 'write' function that will be used by `morgan`
 logger.stream = {

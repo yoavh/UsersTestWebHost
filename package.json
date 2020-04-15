@@ -3,18 +3,20 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "transpile": "babel ./server --out-dir dist-server --source-maps",
+    "clean": "rimraf dist-server",
     "build": "npm-run-all clean transpile",
     "server": "node ./dist-server/bin/www",
-    "dev": "NODE_ENV=development npm-run-all build server",
-    "prod": "NODE_ENV=production npm-run-all build server",
-    "transpile": "babel ./server --out-dir dist-server",
-    "clean": "rimraf dist-server",
-    "watch:dev": "nodemon --exec npm run dev"
+    "server:inspect": "node --inspect-brk ./dist-server/bin/www",
+    "start": "npm-run-all build server",
+    "inspect": "npm-run-all build server:inspect",
+    "watch": "nodemon --exec npm run inspect"
   },
   "dependencies": {
     "app-root-path": "3.0.0",
     "cookie-parser": "1.4.4",
     "debug": "2.6.9",
+    "dotenv": "8.2.0",
     "express": "4.16.1",
     "morgan": "1.9.1",
     "winston": "3.2.1"
