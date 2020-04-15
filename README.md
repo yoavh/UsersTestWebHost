@@ -52,9 +52,13 @@ install npm
    ```
 
    - In case of runing without nodemon
+
      replace
+
      `"runtimeArgs": ["run-script", "watch"],`
+
      with
+
      `"runtimeArgs": ["run-script", "inspect"],`
 
 3. Start Debuggin
