@@ -26,5 +26,5 @@ install npm
 ### Start Server with npm
 
   - `npm start`
-  - with inspect 'npm run inspect'
-  - with nodemon and inspect 'npm run watch'
+  - with inspect `npm run inspect`
+  - with nodemon and inspect `npm run watch`
