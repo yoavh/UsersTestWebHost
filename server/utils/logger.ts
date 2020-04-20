@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // define the custom settings for each transport (file, console)
-var options = {
+const options = {
   file: {
     level: 'info',
     filename: `${appRoot}/logs/app.log`,
@@ -28,7 +28,7 @@ var options = {
 };
 
 // instantiate a new Winston Logger with the settings defined above
-var logger = winston.createLogger({
+const logger = winston.createLogger({
   levels: winston.config.syslog.levels,
   transports: [new winston.transports.File(options.file)],
   exitOnError: false, // do not exit on handled exceptions
@@ -39,11 +39,11 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // create a stream object with a 'write' function that will be used by `morgan`
-logger.stream = {
-  write: function (message, encoding) {
-    // use the 'info' log level so the output will be picked up by both transports (file and console)
-    logger.log('info', message);
-  },
-};
+// logger.stream = {
+//   write: (message: string) => {
+//     // use the 'info' log level so the output will be picked up by both transports (file and console)
+//     logger.log('info', message);
+//   },
+// };
 
 export default logger;

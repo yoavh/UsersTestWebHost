@@ -1,4 +1,4 @@
 {
-  "watch": ["server/*", "public/*"],
+  "watch": ["dist-server/*"],
   "ignore": ["**/__tests__/**", "*.test.js", "*.spec.js"]
 }
