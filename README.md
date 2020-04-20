@@ -2,63 +2,77 @@
 
 web api support users test project
 
+# Table of contents:
+
 - [UsersTestWebHost](#userstestwebhost)
-  - [Requirements](#requirements)
-  - [Installation](#installation)
-  - [Start Server with npm](#start-server-with-npm)
-  - [Debug with VsCode](#debug-with-vscode)
+- [Table of contents:](#table-of-contents)
+- [Prerequisites](#prerequisites)
+- [Getting started](#getting-started)
+  - [Debug with VS Code](#debug-with-vs-code)
 
-### Requirements
+# Prerequisites
 
-- Node 12
-- Git
+To build and run this app locally you will need a few things:
 
-### Installation
+- NodeJs v12 - Install [Node.js](https://nodejs.org/en/)
 
-clone repo
+# Getting started
 
-`git clone https://github.com/yoavh/UsersTestWebHost.git`
+- Clone the repository
 
-install npm
+```
+git clone https://github.com/yoavh/UsersTestWebHost.git <project_name>
+```
 
-`npm install`
+- Install dependencies
 
-### Start Server with npm
+```
+cd <project_name>
+npm install
+```
 
-- `npm start`
-- with inspect `npm run inspect`
-- with nodemon and inspect `npm run watch`
+- Build and run the project
 
-### Debug with VsCode
+```
+npm run build
+npm start
+```
 
-1. Open Configurations
+## Debug with VS Code
+
+1. Open command palette (cmd + shift + p) and select `Debug: Open launch.json`
 2. Add Configuration
 
    ```
    {
      "type": "node",
-     "request": "launch",
-     "name": "Launch via NPM",
-     "runtimeExecutable": "npm",
-     "runtimeArgs": ["run-script", "watch"],
-     "skipFiles": ["<node_internals>/**"],
-     "restart": true,
-     "port": 9229,
-     "sourceMaps": true,
-     "outFiles": ["${workspaceFolder}/dist-server/**/*.js"],
-     "console": "integratedTerminal",
-     "internalConsoleOptions": "neverOpen"
+    "request": "launch",
+    "name": "Debug",
+    "runtimeExecutable": "npm",
+    "runtimeArgs": ["run-script", "debug"],
+    "port": 9229,
+    "skipFiles": ["<node_internals>/**"],
+    "console": "integratedTerminal",
+    "restart": true,
+    "sourceMaps": true,
+    "outFiles": ["${workspaceFolder}/dist-server/**/*.js"],
+    "internalConsoleOptions": "neverOpen"
    }
    ```
 
-   - In case of runing without nodemon
+3. Open command palette (cmd + shift + p) and select `Debug: Select and Start Debugging`
 
-     replace
-
-     `"runtimeArgs": ["run-script", "watch"],`
-
-     with
-
-     `"runtimeArgs": ["run-script", "inspect"],`
-
-3. Start Debugging
+| Npm Script    | Description                                                                                                          |
+| ------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `start`       | Does the same as 'npm run serve'. Can be invoked with `npm start`                                                    |
+| `serve`       | Runs node on `./dist-server/bin/www.js` which is the apps entry point                                                |
+| `build`       | Full build - Run eslint checks with fix than clean output build folder and than build (`lint`, `clean`, `build-ts` ) |
+| `lint`        | Runs ESLint on project files with fix                                                                                |
+| `clean`       | clean output build folder folder                                                                                     |
+| `build-ts`    | Compiles all source `.ts` files to `.js` files in the `dist` folder                                                  |
+| `watch-node`  | Runs node with nodemon so the process restarts if it crashes. Used in the main watch task                            |
+| `watch`       | Runs all watch tasks (TypeScript, Node). Use this for start the app in watch mode                                    |
+| `watch-ts`    | Same as `build-ts` but continuously watches `.ts` files and re-compiles when needed                                  |
+| `debug`       | Performs a full build and then serves the app in watch with debug mode                                               |
+| `watch-debug` | The same as `watch` but includes the --inspect flag so you can attach a debugger                                     |
+| `serve-debug` | Runs the app with the --inspect flag                                                                                 |

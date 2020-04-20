@@ -1,12 +1,10 @@
-#!/usr/bin/env node
-
 /**
  * Module dependencies.
  */
 
 import app from '../app';
 import debugLib from 'debug';
-var debug = debugLib('userstestwebhost:server');
+const debug = debugLib('userstestwebhost:server');
 import { createServer } from 'http';
 import logger from '../utils/logger';
 
@@ -14,21 +12,26 @@ import logger from '../utils/logger';
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-var server = createServer(app);
-logger.log('info', `start server on http://localhost:${port}`);
+const server = createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(port, () => {
+  logger.info(
+    `App is running at http://localhost:${port} in mode ${
+      process.env.NODE_ENV ?? 'development'
+    }"`
+  );
+});
 server.on('error', onError);
 server.on('listening', onListening);
 
@@ -36,8 +39,8 @@ server.on('listening', onListening);
  * Normalize a port into a number, string, or false.
  */
 
-function normalizePort(val) {
-  var port = parseInt(val, 10);
+function normalizePort(val: any) {
+  const port = parseInt(val, 10);
 
   if (isNaN(port)) {
     // named pipe
@@ -56,12 +59,12 @@ function normalizePort(val) {
  * Event listener for HTTP server "error" event.
  */
 
-function onError(error) {
+function onError(error: any) {
   if (error.syscall !== 'listen') {
     throw error;
   }
 
-  var bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
+  const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -83,7 +86,7 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
+  const addr = server.address();
+  const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr?.port;
   debug('Listening on ' + bind);
 }
