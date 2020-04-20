@@ -9,6 +9,7 @@ web api support users test project
 - [Prerequisites](#prerequisites)
 - [Getting started](#getting-started)
   - [Debug with VS Code](#debug-with-vs-code)
+- [Npm scripts](#npm-scripts)
 
 # Prerequisites
 
@@ -61,6 +62,8 @@ npm start
    ```
 
 3. Open command palette (cmd + shift + p) and select `Debug: Select and Start Debugging`
+
+# Npm scripts
 
 | Npm Script    | Description                                                                                                          |
 | ------------- | -------------------------------------------------------------------------------------------------------------------- |
