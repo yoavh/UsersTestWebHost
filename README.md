@@ -8,6 +8,7 @@ A web api server support users test project, written with nodejs and typescript.
 - [Table of contents:](#table-of-contents)
 - [Prerequisites](#prerequisites)
 - [Getting started](#getting-started)
+  - [Environments](#environments)
   - [Debug with VS Code](#debug-with-vs-code)
 - [Npm scripts](#npm-scripts)
 
@@ -38,6 +39,10 @@ npm install
 npm run build
 npm start
 ```
+
+## Environments
+
+- In order to run in production mode set NODE_ENV=production
 
 ## Debug with VS Code
 
