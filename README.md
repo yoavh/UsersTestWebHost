@@ -1,6 +1,6 @@
 # UsersTestWebHost
 
-web api support users test project
+A web api server support users test project, written with nodejs and typescript.
 
 # Table of contents:
 
