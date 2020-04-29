@@ -1,6 +1,6 @@
 import logger from '../utils/logger';
 import { Request, Response, NextFunction, Router } from 'express';
-import IController from './icontroller';
+import IController from './controller';
 
 class UserController implements IController {
   public path = '/users';
@@ -15,7 +15,6 @@ class UserController implements IController {
 
   private get = (req: Request, res: Response, next: NextFunction): void => {
     logger.info('users');
-    throw new Error('my error');
     res.send('respond with a resource');
     next();
   };

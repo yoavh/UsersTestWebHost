@@ -1,14 +1,14 @@
 import express from 'express';
-import IController from './controllers/icontroller';
+import Controller from './controllers/controller';
 import logger from './utils/logger';
 import morgan from 'morgan';
 // import morgan from 'morgan';
 class App {
   app: express.Application;
   port: number;
-  controllers: IController[];
+  controllers: Controller[];
 
-  constructor(port: number, controllers: IController[] = []) {
+  constructor(port: number, controllers: Controller[] = []) {
     this.port = port;
     this.controllers = controllers;
     this.app = express();
@@ -23,7 +23,7 @@ class App {
   }
 
   private initializeControllers(): void {
-    this.controllers.forEach((controller: IController) => {
+    this.controllers.forEach((controller: Controller) => {
       logger.debug(`register ${controller.path}`);
       this.app.use('/api/', controller.router);
     });
