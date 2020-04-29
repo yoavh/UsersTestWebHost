@@ -14,7 +14,7 @@
     "watch-ts": "tsc -w",
     "debug": "npm-run-all build watch-debug",
     "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve-debug\"",
-    "serve-debug": "nodemon  --inspect-brk ./dist-server/bin/www.js"
+    "serve-debug": "nodemon --inspect-brk ./dist-server/bin/www.js"
   },
   "dependencies": {
     "app-root-path": "3.0.0",
