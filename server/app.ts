@@ -1,17 +1,19 @@
 import express from 'express';
-import Controller from './controllers/controller';
+import IController from './interfaces/controller';
 import logger from './utils/logger';
 import morgan from 'morgan';
-// import morgan from 'morgan';
+import { connectToDb } from './utils/dbConnection';
+
 class App {
   app: express.Application;
   port: number;
-  controllers: Controller[];
+  controllers: IController[];
 
-  constructor(port: number, controllers: Controller[] = []) {
+  constructor(port: number, controllers: IController[] = []) {
     this.port = port;
     this.controllers = controllers;
     this.app = express();
+    this.initializeConnection();
     this.initializeMiddlewares();
     this.initializeControllers();
   }
@@ -23,7 +25,7 @@ class App {
   }
 
   private initializeControllers(): void {
-    this.controllers.forEach((controller: Controller) => {
+    this.controllers.forEach((controller: IController) => {
       logger.debug(`register ${controller.path}`);
       this.app.use('/api/', controller.router);
     });
@@ -40,6 +42,9 @@ class App {
         },
       })
     );
+  }
+  private initializeConnection(): void {
+    connectToDb();
   }
 }
 export default App;
